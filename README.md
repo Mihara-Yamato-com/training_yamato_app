@@ -1,0 +1,1 @@
+# training_yamato_app
