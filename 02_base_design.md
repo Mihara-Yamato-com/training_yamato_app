@@ -33,12 +33,12 @@ flowchart TD
 
     SCR001["SCR001<br>ログイン画面"]
 
-    SCR001 -->|一般ユーザー| SCR002["SCR002<br>ユーザー情報画面"]
+    SCR001 -->|一般ユーザー| SCR002["SCR002<br>ユーザー登録画面"]
     SCR001 -->|管理者| SCR003["SCR003<br>ユーザー一覧画面"]
 
-    SCR001 -->|新規登録| SCR004["SCR004<br>ユーザー登録画面"]
+    SCR001 -->|新規登録| SCR004["SCR004<br>ユーザー情報画面"]
     SCR003 -->|編集| SCR005["SCR005<br>ユーザー編集画面"]
-    SCR003 -->|削除|SCR001["SCR001<br>ログイン画面"]
+    SCR003 -->|削除|SCR003["SCR003<br>ユーザー一覧画面"]
     SCR004 -->|削除|SCR001["SCR001<br>ログイン画面"]
 
     SCR004 -->|ログアウト| SCR001
@@ -110,11 +110,19 @@ flowchart TD
 ---
 
 ## 2.6 ユーザー新規登録
+
+### 表示項目
 |項目|説明|
 |:---|:---|
 |名前|ユーザー名|
 |メールアドレス|ログインID|
 |パスワード|ログイン時の認証用パスワード|
+
+### ボタン
+|ボタン|処理|
+|:---|:---|
+|新規登録|ユーザー情報画面へ遷移|
+
 
 # 3. 機能設計
 
@@ -180,7 +188,7 @@ flowchart TD
 
 ### 概要
 
-ログイン中のユーザーと管理者が登録済みユーザーを削除する。
+管理者が登録済みユーザーを削除する。
 
 ---
 
@@ -216,8 +224,8 @@ flowchart TD
 |id|bigint|×|PK|ユーザーID|
 |name|string|×||ユーザー名|
 |email|string|×|UNIQUE|メールアドレス|
-|password_digest|string|×||パスワード|
-|role|string|×||権限|
+|encrypted_password|string|×||パスワード|
+|role|integer|×||権限 (0: 一般ユーザー、1:管理者)|
 |created_at|datetime|×||作成日時|
 |updated_at|datetime|×||更新日時|
 
@@ -233,7 +241,7 @@ USERS {
     string name
     string email
     string encrypted_password
-    string role
+    integer role
     datetime created_at
     datetime updated_at
 }
@@ -299,3 +307,7 @@ USERS {
 - 管理者のみユーザー管理機能を利用できる
 - Webブラウザから利用する
 - インターネット接続が必要
+
+# 12.　今回実装しない機能
+
+- 一般ユーザー自身による退会機能
