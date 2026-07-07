@@ -1,0 +1,7 @@
+<h1>ユーザー情報</h1>
+
+<p>名前：<%= @user.name %></p>
+<p>メール：<%= @user.email %></p>
+<p>権限：<%= @user.role %></p>
+
+<%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
