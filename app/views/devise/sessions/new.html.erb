@@ -1,26 +1,30 @@
-<h2>Log in</h2>
+<h1>ログイン</h1>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_with model: resource, scope: resource_name, url: session_path(resource_name), local: true do |f| %>
   <div class="field">
-    <p><%= f.label :email %></p>
+    <p><%= f.label :メールアドレス %></p>
     <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :password %></p>
+    <p><%= f.label :パスワード %></p>
     <p><%= f.password_field :password, autocomplete: "current-password" %></p>
   </div>
 
   <% if devise_mapping.rememberable? %>
     <div class="field">
       <p><%= f.check_box :remember_me %></p>
-      <p><%= f.label :remember_me %></p>
+      <p><%= f.label :保存しますか？ %></p>
     </div>
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "ログインする" %>
+  </div>
+
+  <div class="title">
+    <p><%= link_to "新規登録へ", new_registration_path(resource_name) =%><p>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+

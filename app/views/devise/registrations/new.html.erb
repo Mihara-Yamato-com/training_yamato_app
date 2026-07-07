@@ -1,34 +1,35 @@
-<h2>Sign up</h2>
+<h1>新規登録</h1>
 
 <%= form_with model: resource,scope: resource_name,url: registration_path(resource_name),local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <p><%= f.label :name %></p>
+    <p><%= f.label :名前 %></p>
     <p><%= f.text_field :name, autofocus: true %></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :email %></p>
+    <p><%= f.label :メールアドレス %></p>
     <p><%= f.email_field :email, autocomplete: "email" %></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :password %></p>
+    <p><%= f.label :パスワード %></p>
     <% if @minimum_password_length %>
-      <p><em>(<%= @minimum_password_length %> characters minimum)</em></p>
+      <p><em>(<%= @minimum_password_length %> 文字以上)</em></p>
     <% end %>
     <p><%= f.password_field :password, autocomplete: "new-password" %></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :password_confirmation %></p>
+    <p><%= f.label :確認用パスワード %></p>
     <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
+
+  <p><%= link_to "ログインへ", registration_path(resource_name) =%><p>
 <% end %>
 
-<%= render "devise/shared/links" %>
